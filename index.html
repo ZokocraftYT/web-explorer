@@ -1,1 +1,87 @@
-<h1>test</h1>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Navigateur ZokoPower 💻🔎</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+    }
+    h1 {
+      margin-bottom: 30px;
+    }
+    .input-block {
+      margin-bottom: 25px;
+    }
+    input {
+      width: 300px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-right: 10px;
+    }
+    button {
+      padding: 10px 15px;
+      font-size: 16px;
+      border-radius: 8px;
+      background-color: #6260da;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🌐 Navigateur / Recherche Google</h1>
+
+  <div class="input-block">
+    <input type="text" id="urlInput" placeholder="Tape un lien genre https://zokocraft.fr">
+    <button onclick="openLink()">Aller au lien</button>
+  </div>
+
+  <div class="input-block">
+    <input type="text" id="searchInput" placeholder="Tape une recherche Google">
+    <button onclick="searchGoogle()">Rechercher</button>
+  </div>
+
+  <script>
+    const urlInput = document.getElementById("urlInput");
+    const searchInput = document.getElementById("searchInput");
+
+    function openLink() {
+      let link = urlInput.value.trim();
+
+      // Si l'utilisateur a oublié le https:// on le rajoute
+      if (!/^https?:\/\//.test(link)) {
+        link = "https://" + link;
+      }
+
+      // On ouvre le lien dans un nouvel onglet
+      window.open(link, '_blank');
+    }
+
+    function searchGoogle() {
+      const query = encodeURIComponent(searchInput.value.trim());
+      const url = `https://www.google.com/search?q=${query}`;
+      window.open(url, '_blank');
+    }
+
+    // Touche entrée pour chaque champ
+    urlInput.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") openLink();
+    });
+
+    searchInput.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") searchGoogle();
+    });
+  </script>
+
+</body>
+</html>
